@@ -9,8 +9,8 @@
     <ProjectGuid>{3E8CF8BC-329C-4D7A-BB90-744DA4D67664}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>QuadTrees</RootNamespace>
-    <AssemblyName>QuadTrees</AssemblyName>
+    <RootNamespace>MonoPoints</RootNamespace>
+    <AssemblyName>MonoPoints</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
