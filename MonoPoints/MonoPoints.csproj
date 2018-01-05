@@ -77,6 +77,15 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="Content\Fonts\Arial.spritefont" />
+    <None Include="Content\Fonts\kooten.spritefont" />
+    <None Include="Content\Fonts\Linds.spritefont" />
+    <None Include="Content\Fonts\Miramo.spritefont" />
+    <None Include="Content\Fonts\Miramob.spritefont" />
+    <None Include="Content\Fonts\Peric.spritefont" />
+    <None Include="Content\Fonts\Pericl.spritefont" />
+    <None Include="Content\Fonts\Pesca.spritefont" />
+    <None Include="Content\Fonts\Pescab.spritefont" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HelperMonoLib\HelperMonoLib.csproj">

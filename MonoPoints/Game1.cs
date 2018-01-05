@@ -13,14 +13,16 @@ namespace MonoPoints
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteFont scoreFont;
         Texture2D pointTexture;
         
         IList<VertexPositionSizeColor> vertexList;
         int vertexSize = 10;
         int skippedPoints = 0;
-        Color vertexColor = Color.Black;
+        Color vertexColor = Color.White;
 
         IList<Color> colorsList;
+        IDictionary<string, Color> colorsDictionary;
         int colorIndex;
 
         // Mouse Related Variables
@@ -48,8 +50,9 @@ namespace MonoPoints
             vertexList = new List<VertexPositionSizeColor>();
 
             ColorsHelper ch = new ColorsHelper();
+            colorsDictionary = ch.GetColorsDictionary();
             colorsList = ch.GetColorsList();
-            colorIndex = colorsList.IndexOf(Color.Black);
+            colorIndex = colorsList.IndexOf(vertexColor);
 
             base.Initialize();
         }
@@ -65,6 +68,8 @@ namespace MonoPoints
 
             // TODO: use this.Content to load your game content here
             pointTexture = Content.Load<Texture2D>(@"Resources\Point");
+            scoreFont = Content.Load<SpriteFont>(@"Fonts\Linds");
+            
         }
 
         /// <summary>
@@ -97,7 +102,7 @@ namespace MonoPoints
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black); // .CornflowerBlue);
 
             // TODO: Add your drawing code here
             foreach(var vertex in vertexList)
@@ -111,6 +116,11 @@ namespace MonoPoints
                         vertex.Size,
                         vertex.Size),
                     vertex.Color);
+
+                spriteBatch.DrawString(
+                    scoreFont, 
+                    "Color: " + vertex.Color.ToString(), new Vector2(0, 0), Color.White);
+
                 spriteBatch.End();
             }
 
