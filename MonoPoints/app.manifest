@@ -3,7 +3,6 @@
   <assemblyIdentity version="1.0.0.0" name="MonoPoints"/>
   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
     <security>
-      
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
         <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
       </requestedPrivileges>
