@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Classes\ColorsHelper.cs" />
+    <Compile Include="Classes\Textured2DPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\VertexPositionSizeColor.cs" />
   </ItemGroup>
