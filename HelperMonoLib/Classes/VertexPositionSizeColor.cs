@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Runtime.InteropServices;
 
-namespace HelperMonoLib
+namespace Shakkour.MonoGame.Helper
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public class VertexPositionSizeColor : IVertexType

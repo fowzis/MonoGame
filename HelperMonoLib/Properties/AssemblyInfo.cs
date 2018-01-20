@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HelperMonoLib")]
-[assembly: AssemblyProduct("HelperMonoLib")]
+[assembly: AssemblyTitle("Shakkour.MonoGame.Helper")]
+[assembly: AssemblyProduct("Shakkour.MonoGame.Helper")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]

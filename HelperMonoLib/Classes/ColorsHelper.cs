@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Shakkour.Utils;
 
 namespace Shakkour.MonoGame.Helper
 {
@@ -10,7 +11,7 @@ namespace Shakkour.MonoGame.Helper
         {
             List<Color> colorsList = new List<Color>();
 
-            var colors = HelperUtilsLib.PropertyHelper.GetStaticPropertyBag(typeof(Color));
+            var colors = PropertyHelper.GetStaticPropertyBag(typeof(Color));
             foreach (KeyValuePair<string, object> colorPair in colors)
             {
                 Console.WriteLine(colorPair.Key);
@@ -24,7 +25,7 @@ namespace Shakkour.MonoGame.Helper
         {
             Dictionary<string, Color> colorsDictionary = new Dictionary<string, Color>();
 
-            var colorsDict = HelperUtilsLib.PropertyHelper.GetStaticPropertyBag(typeof(Color));
+            var colorsDict = PropertyHelper.GetStaticPropertyBag(typeof(Color));
             foreach (KeyValuePair<string, object> colorPair in colorsDict)
             {
                 Console.WriteLine(colorPair.Key + " - " + colorPair.Value.ToString());

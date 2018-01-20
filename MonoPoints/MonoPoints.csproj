@@ -88,6 +88,13 @@
     <None Include="Content\Fonts\Pescab.spritefont" />
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\HelperMonoLib\Shakkour.MonoGame.Helper.csproj">
       <Project>{bb10773d-a853-4012-a4e1-8e44f3ac6bca}</Project>
       <Name>Shakkour.MonoGame.Helper</Name>
@@ -96,13 +103,6 @@
       <Project>{2dfa441f-4d09-4940-a6e8-60c875e2116e}</Project>
       <Name>Shakkour.Utils</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

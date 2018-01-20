@@ -2,7 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using HelperMonoLib;
+
+using Shakkour.MonoGame.Helper;
 
 namespace MonoPoints
 {
