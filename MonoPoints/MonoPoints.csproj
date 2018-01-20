@@ -92,9 +92,9 @@
       <Project>{bb10773d-a853-4012-a4e1-8e44f3ac6bca}</Project>
       <Name>Shakkour.MonoGame.Helper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HelperUtilities\HelperUtilsLib.csproj">
+    <ProjectReference Include="..\HelperUtilities\Shakkour.Utils.csproj">
       <Project>{2dfa441f-4d09-4940-a6e8-60c875e2116e}</Project>
-      <Name>HelperUtilsLib</Name>
+      <Name>Shakkour.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

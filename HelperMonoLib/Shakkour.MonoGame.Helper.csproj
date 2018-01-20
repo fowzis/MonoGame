@@ -61,9 +61,9 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HelperUtilities\HelperUtilsLib.csproj">
+    <ProjectReference Include="..\HelperUtilities\Shakkour.Utils.csproj">
       <Project>{2dfa441f-4d09-4940-a6e8-60c875e2116e}</Project>
-      <Name>HelperUtilsLib</Name>
+      <Name>Shakkour.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,8 +7,8 @@
     <ProjectGuid>{2DFA441F-4D09-4940-A6E8-60C875E2116E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HelperUtilities</RootNamespace>
-    <AssemblyName>HelperUtilities</AssemblyName>
+    <RootNamespace>Shakkour.Utils</RootNamespace>
+    <AssemblyName>Shakkour.Utils</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperUtilsLib", "HelperUtilities\HelperUtilsLib.csproj", "{2DFA441F-4D09-4940-A6E8-60C875E2116E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shakkour.Utils", "HelperUtilities\Shakkour.Utils.csproj", "{2DFA441F-4D09-4940-A6E8-60C875E2116E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shakkour.MonoGame.Helper", "HelperMonoLib\Shakkour.MonoGame.Helper.csproj", "{BB10773D-A853-4012-A4E1-8E44F3AC6BCA}"
 EndProject

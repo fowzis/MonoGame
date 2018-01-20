@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace HelperUtilsLib
+namespace Shakkour.Utils
 {
     public static class PropertyHelper
     {
