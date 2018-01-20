@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperUtilsLib", "HelperUtilities\HelperUtilsLib.csproj", "{2DFA441F-4D09-4940-A6E8-60C875E2116E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperMonoLib", "HelperMonoLib\HelperMonoLib.csproj", "{BB10773D-A853-4012-A4E1-8E44F3AC6BCA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shakkour.MonoGame.Helper", "HelperMonoLib\Shakkour.MonoGame.Helper.csproj", "{BB10773D-A853-4012-A4E1-8E44F3AC6BCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoPoints", "MonoPoints\MonoPoints.csproj", "{3E8CF8BC-329C-4D7A-BB90-744DA4D67664}"
 EndProject

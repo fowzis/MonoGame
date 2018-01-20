@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace HelperMonoLib
+namespace Shakkour.MonoGame.Helper
 {
     public class ColorsHelper : IDisposable
     {

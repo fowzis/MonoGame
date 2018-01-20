@@ -9,8 +9,8 @@
     <ProjectGuid>{BB10773D-A853-4012-A4E1-8E44F3AC6BCA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HelperMonoLib</RootNamespace>
-    <AssemblyName>HelperMonoLib</AssemblyName>
+    <RootNamespace>Shakkour.MonoGame.Helper</RootNamespace>
+    <AssemblyName>Shakkour.MonoGame.Helper</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
