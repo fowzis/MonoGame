@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,13 +17,13 @@ namespace MonoPoints
         SpriteBatch spriteBatch;
         SpriteFont scoreFont;
         Texture2D pointTexture;
-        
-        IList<VertexPositionSizeColor> vertexList;
+
+        VertexBufferTextured VertexBuffer;
+
         int vertexSize = 10;
-        int skippedPoints = 0;
         Color vertexColor = Color.White;
 
-        IList<Color> colorsList;
+        ArrayList collorArray;
         IDictionary<string, Color> colorsDictionary;
         int colorIndex;
 
@@ -48,12 +49,10 @@ namespace MonoPoints
             // TODO: Add your initialization logic here
 
             // Instanciate the list of VertexPosition 
-            vertexList = new List<VertexPositionSizeColor>();
-
             ColorsHelper ch = new ColorsHelper();
             colorsDictionary = ch.GetColorsDictionary();
-            colorsList = ch.GetColorsList();
-            colorIndex = colorsList.IndexOf(vertexColor);
+            collorArray = ch.GetColorsArray();
+            colorIndex = collorArray.IndexOf(vertexColor);
 
             base.Initialize();
         }
@@ -70,7 +69,9 @@ namespace MonoPoints
             // TODO: use this.Content to load your game content here
             pointTexture = Content.Load<Texture2D>(@"Resources\Point");
             scoreFont = Content.Load<SpriteFont>(@"Fonts\Linds");
-            
+
+            VertexBuffer = new VertexBufferTextured();
+            VertexBuffer.Initialize(pointTexture);
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace MonoPoints
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-            vertexList.Clear();
+            VertexBuffer.Clear();
         }
 
         /// <summary>
@@ -103,27 +104,14 @@ namespace MonoPoints
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black); // .CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            foreach(var vertex in vertexList)
-            {
-                spriteBatch.Begin();
-                spriteBatch.Draw(
-                    pointTexture,
-                      new Rectangle(
-                        (int)(vertex.Position.X),
-                        (int)(vertex.Position.Y),
-                        vertex.Size,
-                        vertex.Size),
-                    vertex.Color);
+            spriteBatch.Begin();
 
-                spriteBatch.DrawString(
-                    scoreFont, 
-                    "Color: " + vertex.Color.ToString(), new Vector2(0, 0), Color.White);
+            VertexBuffer.Draw(spriteBatch);
 
-                spriteBatch.End();
-            }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
@@ -140,43 +128,27 @@ namespace MonoPoints
             this.Window.Title = "(X = " + ms.X.ToString() + " , Y = " + ms.Y.ToString() + ") " +
                 "(LB: " + (ms.RightButton == ButtonState.Pressed).ToString() + " , " +
                 "RB: " + (ms.LeftButton == ButtonState.Pressed).ToString() + "), " +
-                "(Points: " + vertexList.Count.ToString() + "), " +
+                "(Points: " + VertexBuffer.Count.ToString() + "), " +
                 //"(ScrollWheel: " + ms.ScrollWheelValue.ToString() + ", " + prevScrollWheelValue.ToString() + "), " +
                 "(Point Size: " + vertexSize.ToString() + "), " +
                 //"(Points exists: " + skippedPoints.ToString() + "), " +
-                "(Colors: " + colorsList.Count + ", Index: " + colorIndex.ToString() + ")";
+                "(Colors: " + collorArray.Count + ", Index: " + colorIndex.ToString() + ")";
 
             if (ms.LeftButton == ButtonState.Pressed)
             {
                 if (vertexSize > 0)
                 {
-                    VertexPositionSizeColor newVertex = new VertexPositionSizeColor(
-                        new Vector3(
-                            (float)(ms.X - vertexSize / 2),
-                            (float)(ms.Y - vertexSize / 2),
-                            0.0F),
-                        vertexSize,
-                        vertexColor);
-
-                    // if exist a point in the same coordinate, skip adding it again
-                    if (!vertexList.Contains(newVertex))
-                    {
-                        vertexList.Add(newVertex);
-                    }
-                    else
-                    {
-                        skippedPoints++;
-                    }
+                    VertexBuffer.Add(ms.X, ms.Y, vertexSize, vertexColor);
                 }
             }
 
             // Increment to next color
             if (rbPrevState == ButtonState.Pressed && ms.RightButton == ButtonState.Released)
             {
-                if (++colorIndex > colorsList.Count - 1)
+                if (++colorIndex > collorArray.Count - 1)
                     colorIndex = 0;
 
-                vertexColor = colorsList[colorIndex];
+                vertexColor = (Color) collorArray[colorIndex];
             }
             rbPrevState = ms.RightButton;
 

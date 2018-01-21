@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Shakkour.Utils;
@@ -7,18 +8,32 @@ namespace Shakkour.MonoGame.Helper
 {
     public class ColorsHelper : IDisposable
     {
-        public List<Color> GetColorsList()
+        public ArrayList GetColorsArray()
         {
-            List<Color> colorsList = new List<Color>();
+            List<Color> collorArray = new List<Color>();
 
             var colors = PropertyHelper.GetStaticPropertyBag(typeof(Color));
             foreach (KeyValuePair<string, object> colorPair in colors)
             {
                 Console.WriteLine(colorPair.Key);
-                colorsList.Add((Color)colorPair.Value);
+                collorArray.Add((Color)colorPair.Value);
             }
 
-            return colorsList;
+            return new ArrayList(collorArray);
+        }
+
+        public List<Color> GetColorsList()
+        {
+            List<Color> collorArray = new List<Color>();
+
+            var colors = PropertyHelper.GetStaticPropertyBag(typeof(Color));
+            foreach (KeyValuePair<string, object> colorPair in colors)
+            {
+                Console.WriteLine(colorPair.Key);
+                collorArray.Add((Color)colorPair.Value);
+            }
+
+            return collorArray;
         }
 
         public Dictionary<string, Color> GetColorsDictionary()
