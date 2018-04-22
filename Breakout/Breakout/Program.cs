@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QuadTree
+namespace Breakout
 {
 #if WINDOWS || LINUX
     /// <summary>
