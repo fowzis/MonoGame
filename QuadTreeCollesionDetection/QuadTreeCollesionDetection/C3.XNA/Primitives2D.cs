@@ -431,7 +431,6 @@ namespace C3.XNA
 
 		#endregion
 
-
 		#region DrawCircle
 
 		/// <summary>
@@ -494,7 +493,6 @@ namespace C3.XNA
 		}
 
 		#endregion
-
 
 		#region DrawArc
 
@@ -609,7 +607,7 @@ namespace C3.XNA
             P1 = new Vector2((float)X1, (float)Y1);
             P2 = new Vector2((float)X2, (float)Y2);
 
-            DrawLine(spriteBatch, P1, P2, color, thickness);
+            DrawLine(spriteBatch, P1, P2, color, 1);
         }
 
         #endregion

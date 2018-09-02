@@ -16,11 +16,10 @@ namespace Breakout
 
         private static Ball Ball;
         private static Paddle Paddle;
-        private static int paddleHitCoolDown = 0, coolDownPeriod = 3;
+        private static int paddleHitCoolDown = 0, coolDownPeriod = 5;
 
         static bool isUpdating;
         static List<Entity> addedEntities = new List<Entity>();
-        static int hit = 0;
 
         public static int HitPoints { get { return hitPoints.Count; } }
 
@@ -55,8 +54,6 @@ namespace Breakout
         {
             // While updating the entities, prevent adding new elements to the entities list
             isUpdating = true;
-            HandleCollisions();
-
             foreach (var entity in entitiesList)
                 entity.Update();
 
@@ -75,15 +72,54 @@ namespace Breakout
             //bullets = bullets.Where(x => !x.IsExpired).ToList();
             //enemies = enemies.Where(x => !x.IsExpired).ToList();
             //blackHoles = blackHoles.Where(x => !x.IsExpired).ToList();
+
+            HandleCollisions();
         }
 
         static int n = 0;
         private static void HandleCollisions()
         {
-            #region Handle ball collision with screen play field bounds
-            Rectangle screenSounds = Game1.Viewport.Bounds;
+            // Handle ball collision with screen play field bounds
+            //CheckIntersectionBallPath(Paddle);
+            if (IsBallScreenCollision(out bool killBall))
+            {
+                if (killBall)
+                {
+                    Console.WriteLine("Missed the Ball. Lost a life!");
+                    Ball.ResetBall();
+                }
+                else
+                {
+                    Console.WriteLine("Screen side hit.");
+                }
+
+                return;
+            }
+
+
+            #region Handle ball collision with Paddle
+            if(IsBallPaddleCollision())
+            {
+                Console.WriteLine("Paddle Collision.");
+                return;
+            }
+            #endregion
+
+            if (IsBallBricksCollision())
+            {
+                Console.WriteLine("Bricks Collision.");
+                return;
+            }
+        }
+
+        private static bool IsBallScreenCollision(out bool killBall)
+        {
+            Rectangle screenBounds = Game1.Viewport.Bounds;
+
+            killBall = false;
+
             // If colliding with the defined play field boundaries, deflect the ball
-            if (Ball.X <= 0 || Ball.X >= screenSounds.Width - Ball.Width)
+            if (Ball.X <= 0 || Ball.X >= screenBounds.Width - Ball.Width)
             {
                 Ball.DeflectX();
                 hitPoints.Clear();
@@ -93,36 +129,43 @@ namespace Breakout
                 Ball.DeflectY();
                 hitPoints.Clear();
             }
-            else if (Ball.Y >= screenSounds.Height)
+            else if (Ball.Y >= screenBounds.Height)
             {
                 hitPoints.Clear();
-                Game1.Instance.Exit();
+
+                // TODO - Kill ball and reset position or end game
+                killBall = true;
+            }
+            else
+            {
+                return false;
             }
 
-            #endregion
+            return true;
+        }
 
-            #region Handle ball collision with Paddle
+        private static bool IsBallPaddleCollision()
+        {
             // If collission detected, give the bacl chance to get a distance
             if (paddleHitCoolDown == 0)
             {
                 // Collission with Paddel Top
-                if ((Ball.Center.X > Paddle.BoundingBox.Left)
+                if (   (Ball.Center.X > Paddle.BoundingBox.Left)
                     && (Ball.Center.X < Paddle.BoundingBox.Right)
-                    && (Ball.Center.Y >= Paddle.BoundingBox.Top - Ball.Radius) // Hit the top line
-                    && (Ball.Center.Y < Paddle.BoundingBox.Top))
+                    && (Ball.Center.Y < Paddle.BoundingBox.Top) 
+                    && (Ball.Center.Y + Ball.Radius >= Paddle.BoundingBox.Top )) // Hit the top line
                 {
+                    Ball.SetOnetimeBottomRightBounds(new Vector2(Game1.Viewport.Width, Paddle.BoundingBox.Top));
                     Ball.DeflectY();
-                    paddleHitCoolDown = coolDownPeriod;
                     Console.WriteLine("Paddle Hit - Top", ++n);
                 }
                 else // Collision with Paddle left side
-                if ((Ball.Center.X >= Paddle.BoundingBox.Left - Ball.Radius)     // Hit the left line
+                if (   (Ball.Center.X >= Paddle.BoundingBox.Left - Ball.Radius)     // Hit the left line
                     && (Ball.Center.X < Paddle.BoundingBox.Left)     // Hit the left line
                     && (Ball.Center.Y > Paddle.BoundingBox.Top)
                     && (Ball.Center.Y < Paddle.BoundingBox.Bottom))
                 {
                     Ball.DeflectX();
-                    paddleHitCoolDown = coolDownPeriod;
                     Console.WriteLine("Paddle Hit - Left", ++n);
                 }
                 else // Collision with Paddle right side
@@ -132,9 +175,17 @@ namespace Breakout
                     && (Ball.Center.Y < Paddle.BoundingBox.Bottom))
                 {
                     Ball.DeflectX();
-                    paddleHitCoolDown = coolDownPeriod;
                     Console.WriteLine("Paddle Hit - Right", ++n);
                 }
+                else
+                {
+                    // No collision with the paddle detected
+                    return false;
+                }
+
+                // No collision with the paddle detected
+                paddleHitCoolDown = coolDownPeriod;
+                return true;
             }
             else
             {
@@ -142,17 +193,11 @@ namespace Breakout
                 paddleHitCoolDown--;
             }
 
-            Game1.Instance.Window.Title = "paddleHitCoolDown={" + paddleHitCoolDown + "}, PositionNextFrame = {" + Ball.PositionNextFrame + ", Diff={" + (Ball.Position - Ball.PositionNextFrame) + "}";
-            #endregion
-
-            HandleBallCollision();
+            return false;
         }
 
-        private static void HandleBallCollision()
+        public static bool IsBallBricksCollision()
         {
-            // Identify all the bricks in the ball path
-            CheckIntersectionBallPath(Paddle);
-
             // return a list of bricks in the path
             foreach (var brick in bricksList)
             {
@@ -202,19 +247,8 @@ namespace Breakout
                 //}
                 #endregion
             }
-        }
 
-        private static bool IsBallColliding(Entity entity, out BrickSide side)
-        {
-            side = BrickSide.None;
-
-            if (entity.BoundingBox.Intersects(Ball.BoundingBox))
-            {
-                //Game1.Instance.Window.Title = "Hit=" + hit++;
-                return true;
-            }
-
-            return false;
+            return true;
         }
 
         /// <summary>
@@ -223,7 +257,7 @@ namespace Breakout
         /// <param name="entity"></param>
         private static void CheckIntersectionBallPath(Entity entity)
         {
-            LineSegment ray = Ball.GetRay;
+            LineSegment ray = Ball.GetRay();
 
             foreach (LineSegment lineSegment in entity.GetBoundSegments())
             {
@@ -238,14 +272,6 @@ namespace Breakout
                     //break;
                 }
             }
-        }
-
-        private static bool IsColliding(Entity a, Entity b)
-        {
-            float radius = a.Radius + b.Radius;
-            float distanceSquared = Vector2.DistanceSquared(a.Position, b.Position);
-            float squaredRadius = radius * radius;
-            return distanceSquared < squaredRadius;
         }
 
         public static void Draw(SpriteBatch spriteBatch)
